@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,11 +30,20 @@ public class RecyclerViewDemoAdapter extends RecyclerView.Adapter<RecyclerViewDe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DemoViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final DemoViewHolder holder, int position)
     {
-        Country mCountry=countryList.get(position);
+        final Country mCountry=countryList.get(position);
         holder.title.setText(mCountry.getTitle());
         holder.imgFlag.setImageResource(mCountry.getFlag());
+
+        //set on click on cell
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Toast.makeText(holder.itemView.getContext(),mCountry.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
